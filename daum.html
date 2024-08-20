@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+      function postMessage(data) {
+        window.ReactNativeWebView.postMessage(JSON.stringify({ data: data }));
+      }
+      new daum.Postcode({
+        width: document.body.clientWidth,
+        height: document.body.clientHeight,
+        oncomplete: function (data) {
+          postMessage({ data: data });
+        },
+      }).embed(document.getElementById("#app"), {
+        autoClose: false,
+      });
+    </script>
+  </body>
+</html>
